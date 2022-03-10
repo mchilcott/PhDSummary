@@ -23,7 +23,12 @@
                 <div style="position: absolute; bottom:0; right:0; font-size:12pt;">Matthew Chilcott<br />Kj&aelig;rgaard Lab<br />Physics, University of Otago</div>
             </section>
             <section>
-                <p>Stuff from chpt 1</p>
+                <img width="50%" src="imgs/External/Chin.png" />
+                <p style="font-size:20px;">Chin, et al. <a href="http://dx.doi.org/10.1103/RevModPhys.82.1225">10.1103/RevModPhys.82.1225</a></p>
+            </section>
+            <section>
+                <img width="40%" src="imgs/External/Vanroose.svg" />
+                <p style="font-size:20px;">Vanroose, et al. <a href="http://dx.doi.org/10.1088/0305-4470/30/15/034">10.1088/0305-4470/30/15/034</a></p>
             </section>
         </section>
 	<section><!-- Machine -->
@@ -31,13 +36,18 @@
             <img src="imgs/Machine/FullLab2.jpg" />
           </section>
           <section>
+            <p>Experimental Sequence...</p>
             <video autoplay loop style="margin: 0 10pt;" src="imgs/Machine/Animation.mp4"></video>
           </section>
         </section>
         <section><!-- Monitoring -->
-            <section>
+            <section data-auto-animate>
                 <p>Monitoring</p>
-                <img src="imgs/Monitoring/Nodes.jpg" />
+                <img width="80%" src="imgs/Monitoring/Node1.jpg" />
+            </section>
+            <section data-auto-animate>
+                <img width="40%" src="imgs/Monitoring/Node1.jpg" />
+                <img width="40%" src="imgs/Monitoring/Node2.jpg" />
             </section>
             <section>
                 <img src="imgs/Monitoring/MonitoringPaper.png" />
@@ -70,13 +80,13 @@
             
             <section>
                 <p>Wavelength Monitoring</p>
-                <img src="imgs/Monitoring/wavemeter_setup.jpg" />
+                <img  width="80%" src="imgs/Monitoring/wavemeter_setup.jpg" />
             </section>
 
              <section>
                 <ul>
                     <li><a href="http://hoodoo.otago.ac.nz/mattlab/">Visualiation</a></li>
-                    <li><a href="http://hugin:1180">Monitoring</a></li>
+                    <li><a href="http://hugin:1880">Monitoring</a></li>
                     <li><a href="https://github.com/kjaergaard-lab/lab-monitor">Code</a></li>
                 </ul>
             </section>
@@ -87,10 +97,8 @@
                 <p>Optimisation</p>
                 <img src="imgs/Optimisation/MOTClouds.png" />
             </section>
-            <section> <p>Bayesian Optimisation</p>
-                <p>
-                Make Graphic
-                </p>
+            <section>
+                <p>Bayesian Optimisation</p>
                 <img src="imgs/Optimisation/FlowChart.svg" />
             </section>
             <section>
@@ -127,13 +135,14 @@
             <section>
                 <pre><code class="python" data-trim style="font-size: 18px;">
     from skopt import gp_minimize
+    from skopt.callbacks import CheckpointSaver
                 
-    checkpoint_saver = skopt.callbacks.CheckpointSaver("./opt_checkpoint.pkl") 
+    checkpoint_saver = CheckpointSaver("./opt_checkpoint.pkl") 
 
     return gp_minimize(
             run_exp,
             [(1,20), (1,20), (1,20), (1,20), (0.01,1), (0.01,1), (0.01,1), (0.01,1)],
-            x0 = x0 = [15, 10, 10, 6,  0.5, 0.15, 0.15, 0.08],
+            x0 = [15, 10, 10, 6,  0.5, 0.15, 0.15, 0.08],
             y0 = None,
             n_calls=100,
             n_random_starts=20,
@@ -204,9 +213,12 @@
                 \]
                 </p>
             </section>
-            <section data-auto-animate>
+            <section>
             <p style="font-size:20pt;">
             \[
+                \require{color}
+                \definecolor{PSpink}{rgb}{0.965, 0.129, 0.588}
+                \definecolor{PSblue}{rgb}{0.094, 0.753, 0.769}
               \begin{pmatrix} f \\ g \end{pmatrix} =
               \begin{pmatrix} {\color{PSpink}C}^{-1} & 0 \\ {\color{PSpink}C} {\color{PSblue}\tan \lambda} & C \end{pmatrix}
               \begin{pmatrix} \hat{f} \\ \hat{g} \end{pmatrix}
@@ -263,9 +275,14 @@
           <section>
             <img src="imgs/Scattering/Fano3D.svg" />
           </section>
-          <section>
+          <section data-auto-animate>
             <img src="imgs/Scattering/PhaseImageA.svg" />
           </section>
+          <section data-auto-animate>
+                <img width="40%" src="imgs/Scattering/PhaseImageA.svg" />
+                <img width="30%" src="imgs/External/Chin.png" />
+                <p style="font-size:20px;">Chin, et al. <a href="http://dx.doi.org/10.1103/RevModPhys.82.1225">10.1103/RevModPhys.82.1225</a></p>
+            </section>
           <section>
             <img src="imgs/Scattering/PhaseImageB.svg" />
           </section>
@@ -304,28 +321,41 @@
         
         <section><!-- Pole Dancing -->
             <section>
-            <p>Pole Dancing</p>
+                <p>Pole Dancing</p>
+                <img src="imgs/Scattering/PhaseImageB.svg" />
             </section>
             <section>
                 <img src="imgs/Poles/PolePaper.png" />
             </section>
             
             <section>
-                Jost Functions
+                <p>Jost Functions</p>
+                <p>\[u_\ell(k, r) \sim \frac{\ii}{2}\left[\mathscr{F}_\ell(k)\phi_\ell^-(k, r) - \mathscr{F}_\ell(-k)\phi_\ell^+(k, r)\right]\]</p>
+                <p>Have zeros  at (quasi-)bound states.</p>
             </section>
             
             <section>
-                S-matrix poles
+                <p>S-matrix has poles at Jost zeros</p>
+                <p>\[S_\ell (k) = \frac{\mathcal{F}_\ell(-k)}{\mathcal{F}_\ell(k)}\]</p>
             </section>
             
             <section>
-                <video autoplay loop src="imgs/Poles/AnalyticContinuationWithFeshbach102uK.mp4"></video>
+                <p>S-matrix has poles at Jost zeros</p>
+                <p>\[S_\ell (k) = \frac{\mathcal{F}_\ell(-k)}{\mathcal{F}_\ell(k)}\]</p>
+            </section>
+            
+            <section>
+                <video autoplay loop src="imgs/Poles/AvoidedCrossing.mp4"></video>
+            </section>
+            
+            <section>
+                <video width="70%" autoplay loop src="imgs/Poles/AnalyticContinuationWithFeshbach102uK.mp4"></video>
             </section>
             <section>
-                <video autoplay loop src="imgs/Poles/AnalyticContinuationWithFeshbach304uK.mp4"></video>
+                <video width="70%" autoplay loop src="imgs/Poles/AnalyticContinuationWithFeshbach304uK.mp4"></video>
             </section>
             <section>
-                <video autoplay loop src="imgs/Poles/AnalyticContinuationWithFeshbach506uK.mp4"></video>
+                <video width="70%" autoplay loop src="imgs/Poles/AnalyticContinuationWithFeshbach506uK.mp4"></video>
             </section>
             
             <section>
@@ -333,7 +363,6 @@
             </section>
             
             <section>
-            <p>Make table?</p>
                 <table>
                 <tr><td>\(\omega &lt; \frac{1}{4}|\gamma_1 - \gamma_2|\)</td><td>\(\omega = \frac{1}{4}|\gamma_1 - \gamma_2|\)</td><td>\(\omega &gt; \frac{1}{4}|\gamma_1 - \gamma_2|\)</td></tr>
                 <tr>
@@ -342,6 +371,10 @@
                 <td><video autoplay loop width="100%" src="imgs/Poles/DoublePoleAvoid2.mp4"></video></td>
                 </tr>
                 </table>
+            </section>
+            
+            <section>
+                <img src="imgs/Poles/632G_PolesDance.svg" />
             </section>
         </section>
         
