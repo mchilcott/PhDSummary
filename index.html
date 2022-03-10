@@ -1,0 +1,384 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Cold-Atom Engineering and Interacting Collision Resonances - Matthew Chilcott</title>
+
+    <link rel="stylesheet" href="reveal/dist/reset.css">
+    <link rel="stylesheet" href="reveal/dist/reveal.css">
+    <link rel="stylesheet" href="reveal/dist/theme/black.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="reveal/plugin/highlight/monokai.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section><!-- Intro -->
+            <section>
+                <p>Cold-Atom Engineering and Interacting Collision Resonances</p>
+                <img src="imgs/Pend/cover.svg" />
+                <div style="position: absolute; bottom:0; right:0; font-size:12pt;">Matthew Chilcott<br />Kj&aelig;rgaard Lab<br />Physics, University of Otago</div>
+            </section>
+            <section>
+                <p>Stuff from chpt 1</p>
+            </section>
+        </section>
+	<section><!-- Machine -->
+          <section>
+            <img src="imgs/Machine/FullLab2.jpg" />
+          </section>
+          <section>
+            <video autoplay loop style="margin: 0 10pt;" src="imgs/Machine/Animation.mp4"></video>
+          </section>
+        </section>
+        <section><!-- Monitoring -->
+            <section>
+                <p>Monitoring</p>
+                <img src="imgs/Monitoring/Nodes.jpg" />
+            </section>
+            <section>
+                <img src="imgs/Monitoring/MonitoringPaper.png" />
+            </section>
+            <section>
+                <img src="imgs/Monitoring/system_diagram.svg" />
+            </section>
+            <section>
+                <p>Annex Lab Intrumentation</p>
+                <img width="80%" src="imgs/Monitoring/photo.jpg" />
+            </section>
+            <section>
+                <p>Cooling Water</p>
+                <img src="imgs/Monitoring/ChillerSetup.svg" />
+            </section>
+            <section>
+                <img src="imgs/Monitoring/measurement_diagram.svg" />
+            </section>
+            <section>
+                <img src="imgs/Monitoring/water_graph.svg" />
+            </section>
+            
+            <section>
+                <p>Laser Beat-note</p>
+                <img src="imgs/Monitoring/beatnote_diagram.svg"  />
+            </section>
+            <section>
+                <img src="imgs/Monitoring/beatnote_graph.svg" />
+            </section>
+            
+            <section>
+                <p>Wavelength Monitoring</p>
+                <img src="imgs/Monitoring/wavemeter_setup.jpg" />
+            </section>
+
+             <section>
+                <ul>
+                    <li><a href="http://hoodoo.otago.ac.nz/mattlab/">Visualiation</a></li>
+                    <li><a href="http://hugin:1180">Monitoring</a></li>
+                    <li><a href="https://github.com/kjaergaard-lab/lab-monitor">Code</a></li>
+                </ul>
+            </section>
+        </section>
+        
+        <section> <!-- Optimisation -->
+            <section>
+                <p>Optimisation</p>
+                <img src="imgs/Optimisation/MOTClouds.png" />
+            </section>
+            <section> <p>Bayesian Optimisation</p>
+                <p>
+                Make Graphic
+                </p>
+                <img src="imgs/Optimisation/FlowChart.svg" />
+            </section>
+            <section>
+                <img width="100%" src="imgs/Optimisation/Algo.svg" />
+            </section>
+            <section data-auto-animate>
+                <p>Gaussian Process</p>
+                <img width="70%" src="imgs/Optimisation/GaussOpt.svg" />
+            </section>
+            <section data-auto-animate>
+                <img width="40%" src= "imgs/Optimisation/GaussOpt.svg" />
+                <p>
+                    \[\mu(x) = \mathbb{E}\left[ f(x) \right]\]
+                    \[\mathcal{K}(x,x') = \mathbb{E}\left[ \big(f(x) - \mu(x)\big)\big(f(x') - \mu(x')\big) \right]\]
+                </p>
+            </section>
+            <section>
+                <p>Gaussian Process can be defined by sampled data and kernel</p>
+                <p>
+                    \[\mu(x) = \mathcal{K}(x,X)^T(\mathcal{K}(X,X) + I\sigma^2)y\]
+                </p>
+            </section>
+            <section>
+                <p>
+                    \[||x-x'||^2 = \sum_i \alpha_i(x_i - x'_i)^2,\]
+                    \begin{align}
+                    \mathcal{K}(x,x') &= \sigma^2 \frac{2^{1-\nu}}{\Gamma(\nu)}\left(\sqrt{2\nu}||x-x'||\right)^\nu \\
+                    &\quad\times K_\nu\left(\sqrt{2\nu}||x-x'||\right).
+                    \end{align}
+                </p>
+            </section>
+            <section> <p>Acquision Functions</p>
+            </section>
+            <section>
+                <pre><code class="python" data-trim style="font-size: 18px;">
+    from skopt import gp_minimize
+                
+    checkpoint_saver = skopt.callbacks.CheckpointSaver("./opt_checkpoint.pkl") 
+
+    return gp_minimize(
+            run_exp,
+            [(1,20), (1,20), (1,20), (1,20), (0.01,1), (0.01,1), (0.01,1), (0.01,1)],
+            x0 = x0 = [15, 10, 10, 6,  0.5, 0.15, 0.15, 0.08],
+            y0 = None,
+            n_calls=100,
+            n_random_starts=20,
+            callback=checkpoint_saver
+        )
+                </code></pre>
+            </section>
+
+            <section>
+                <img src="imgs/Optimisation/ConvergencePlot.svg" />
+            </section>
+
+            <section>
+                <p>Produces Model of Process</p>
+                <img width="50%" src="imgs/Optimisation/MotOptPlot.svg" />
+            </section>
+        </section>
+        <section><!-- Scattering -->
+            <section>
+                <img src="imgs/Scattering/AtomImageBasic.svg" />
+            </section>
+            <section>
+                <p>\(S\)-matrix</p>
+                <p>\[\left|\psi_\rm{out}\right> = S \left|\psi_\rm{in}\right>\]</p>
+                <p>Cross-section</p>
+                <p>\[\sigma = \frac{4\pi(2\ell + 1)}{k^2}|S_\ell - 1|^2\]</p>
+            </section>
+            <section>
+                <p>
+                    \begin{equation}
+                        \left[ -\frac{\hbar^2}{2\mu}\hat{\nabla}^2 + \hat{H}_\text{int} + \hat{V}(\vec{r})\right] \vec{\Psi}(\vec{r}) = E\vec{\Psi}(\vec{r}).
+                    \end{equation}
+                </p>
+                <img src="imgs/Scattering/RbPotentials.svg" />
+            </section>
+            <section>
+                <p>Calculation via log-derivative</p>
+                <img width="60%" src="imgs/Scattering/LogDerivative.svg" />
+            </section>
+        </section>
+        <section><!-- Resonances -->
+          <section><p>Shape Resonance in energy</p><img src="imgs/PotentialsShape.svg" /></section>
+          <section><p>Feshbach resonances in magnetic field</p><img src="imgs/PotentialsFeshbach.svg" /></section>
+          <section><p>We have both</p><img src="imgs/PotentialsFull.svg" /></section>
+            <section>
+                <p>Feshbach "Zero-energy" experiments</p>
+                <img src="imgs/Resonances/SingleLossModel.svg" />
+            </section>
+            <section data-auto-animate>
+                <img width="100%" src="imgs/ResonanceScatteringImages.svg" />
+                <img  width="50%" src="imgs/BeutlerFano283uK.svg" />
+            </section>
+            <section>
+                <img src="imgs/Resonances/BeutlerFano.svg" />
+            </section>
+        </section>
+        <section><!-- QDT -->
+            <section>
+                <img src="imgs/Scattering/WavefuncScales.svg" />
+            </section>
+            <section data-auto-animate>
+                <img src="imgs/Scattering/QDTExplained.svg" />
+                <p style="font-size:15pt;">
+                \[
+                    \begin{pmatrix} f \\ g \end{pmatrix} =
+                    \begin{pmatrix} C^{-1} & 0 \\ C \tan \lambda & C \end{pmatrix}
+                    \begin{pmatrix} \hat{f} \\ \hat{g} \end{pmatrix}
+                \]
+                </p>
+            </section>
+            <section data-auto-animate>
+            <p style="font-size:20pt;">
+            \[
+              \begin{pmatrix} f \\ g \end{pmatrix} =
+              \begin{pmatrix} {\color{PSpink}C}^{-1} & 0 \\ {\color{PSpink}C} {\color{PSblue}\tan \lambda} & C \end{pmatrix}
+              \begin{pmatrix} \hat{f} \\ \hat{g} \end{pmatrix}
+            \]
+            </p>
+            <img src="imgs/Scattering/tlc2.svg" />
+          </section>
+        </section>
+        <section><!-- What we observe -->
+          <section>
+            <p style="font-size: 20pt;">\[
+            \require{color}
+            \definecolor{PSorange}{rgb}{0.953, 0.565, 0.494}
+            \definecolor{PSpurple}{rgb}{0.635, 0.404, 0.961}
+            \definecolor{PSpink}{rgb}{0.965, 0.129, 0.588}
+            \definecolor{PSblue}{rgb}{0.094, 0.753, 0.769}
+              {\color{PSblue}{\sigma(B, E)}} = \frac{2\pi\hbar}{mE}\sin^2\left(
+              {\color{PSpurple}{\delta_\text{bg}(E)}} +  \tan^{-1}\left[\frac{{\color{PSorange}{\Gamma(E)}} / 2}{B - {\color{PSpink}{B_\text{res}(E)}}}\right]
+              \right)\]
+            </p>
+            <img src="imgs/Scattering/BFParameters.svg" />
+          </section>
+          <section data-auto-animate>
+            <p>Phase Winding</p>
+            <img src="imgs/Scattering/ResonancePhase.svg" width="40%" />
+          </section>
+          <section data-auto-animate>
+            <p>Phase Winding = Shape change</p>
+            <img src="imgs/Scattering/ResonancePhase.svg" width="45%" />
+            <video autoplay loop width="45%" src="imgs/AnimatedQSweep.mp4"></video>
+          </section>
+          <section>
+            <p>The resonance broadens</p>
+            <img src="imgs/Scattering/ResonanceWidth.svg" width="45%" />
+            <p>
+            \[\Gamma(E) = C^{-2}(E) \bar{\Gamma}_B\]
+            </p>
+          </section>
+          <section  data-auto-animate>
+            <p>Enhancement of the short-range wavefunction</p>
+            <p>
+            \[\Gamma(E) = C^{-2}(E) \bar{\Gamma}_B\]
+            </p>
+            <img src="imgs/Scattering/ShapeEnhancement.svg" />
+          </section>
+          <section  data-auto-animate>
+            <p>The resonance shifts</p>
+            <img src="imgs/Scattering/ResonancePosition.svg"/>
+          </section>
+          <section data-auto-animate>
+            <img src="imgs/Scattering/ResonancePosition.svg"/>
+            <p>\[B_\text{res}(E) = B_0 + \frac{E}{\delta\mu} - \frac{\bar{\Gamma}_B}{2} \tan\lambda\]</p>
+          </section>
+          <section>
+            <img src="imgs/Scattering/Fano3D.svg" />
+          </section>
+          <section>
+            <img src="imgs/Scattering/PhaseImageA.svg" />
+          </section>
+          <section>
+            <img src="imgs/Scattering/PhaseImageB.svg" />
+          </section>
+          <section>
+            <img width="80%" src="imgs/Scattering/QDTPaper.png" />
+            <p>arXiv:2112.15416</p>
+          </section>
+        </section>
+        
+        <section><!-- Pendula -->
+            <section>
+                <img src="imgs/Pend/cover.svg" />
+            </section>
+            <section>
+                <video src="imgs/Pend/Pendula.mp4" loop></video>
+            </section>
+            <section>
+                <img width="80%" src="imgs/Pend/pendula.svg" />
+            </section>
+            <section data-auto-animate>
+                <img src="imgs/Pend/PendulumPhase.svg" width="40%"/>
+                <img src="imgs/Scattering/ResonancePhase.svg" width="40%" />
+            </section>
+            <section  data-auto-animate>
+                <p>The resonance broadens</p>
+                <img src="imgs/Scattering/ResonanceWidth.svg" width="45%" />
+                <img src="imgs/Pend/PendulumAmp.svg" width="45%" />
+            </section>
+            <section data-auto-animate>
+                <img width="60%" src="imgs/Pend/ClassicalShift.svg" />
+                <p>
+                \[\Delta\omega_2 \sim \frac{\omega_1^2 - \omega^2}{\left|\omega_1^2 + 2i\gamma_1\omega - \omega^2\right|^2}\]
+                </p>
+            </section>
+        </section>
+        
+        <section><!-- Pole Dancing -->
+            <section>
+            <p>Pole Dancing</p>
+            </section>
+            <section>
+                <img src="imgs/Poles/PolePaper.png" />
+            </section>
+            
+            <section>
+                Jost Functions
+            </section>
+            
+            <section>
+                S-matrix poles
+            </section>
+            
+            <section>
+                <video autoplay loop src="imgs/Poles/AnalyticContinuationWithFeshbach102uK.mp4"></video>
+            </section>
+            <section>
+                <video autoplay loop src="imgs/Poles/AnalyticContinuationWithFeshbach304uK.mp4"></video>
+            </section>
+            <section>
+                <video autoplay loop src="imgs/Poles/AnalyticContinuationWithFeshbach506uK.mp4"></video>
+            </section>
+            
+            <section>
+                <video autoplay loop src="imgs/Poles/ShapeResMovement.mp4"></video>
+            </section>
+            
+            <section>
+            <p>Make table?</p>
+                <table>
+                <tr><td>\(\omega &lt; \frac{1}{4}|\gamma_1 - \gamma_2|\)</td><td>\(\omega = \frac{1}{4}|\gamma_1 - \gamma_2|\)</td><td>\(\omega &gt; \frac{1}{4}|\gamma_1 - \gamma_2|\)</td></tr>
+                <tr>
+                <td><video autoplay loop width="100%" src="imgs/Poles/DoublePoleAvoid1.mp4"></video></td>
+                <td><video autoplay loop width="100%" src="imgs/Poles/DoublePoleCritical.mp4"></video></td>
+                <td><video autoplay loop width="100%" src="imgs/Poles/DoublePoleAvoid2.mp4"></video></td>
+                </tr>
+                </table>
+            </section>
+        </section>
+        
+        
+        <section>
+            <p>Future Work</p>
+        </section>
+        
+      </div>
+    </div>
+
+    <script src="reveal/dist/reveal.js"></script>
+    <script src="reveal/plugin/notes/notes.js"></script>
+    <script src="reveal/plugin/math/math.js"></script>
+    <script src="reveal/plugin/markdown/markdown.js"></script>
+    <script src="reveal/plugin/highlight/highlight.js"></script>
+    <script src="reveal/plugin/zoom/zoom.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+	  controls: false,
+          progress: false,
+          navigationMode: 'linear',
+          // Learn about plugins: https://revealjs.com/plugins/
+          plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath, RevealZoom ]
+      });
+      
+      function videoClick(event){
+         event.target.paused ? event.target.play() : event.target.pause();
+      }
+      
+      videos = document.querySelectorAll('video')
+      videos.forEach((vid) => {
+        vid.onclick = videoClick;
+      })
+    </script>
+  </body>
+</html>
