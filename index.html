@@ -104,12 +104,14 @@
             <section>
                 <img width="100%" src="imgs/Optimisation/Algo.svg" />
             </section>
-            <section data-auto-animate>
+            <section>
                 <p>Gaussian Process</p>
-                <img width="70%" src="imgs/Optimisation/GaussOpt.svg" />
+                <svg width="70%" data-src="imgs/Optimisation/GaussOpt.svg"></svg>
+                <!--<img width="70%" src="imgs/Optimisation/GaussOpt.svg" />-->
             </section>
-            <section data-auto-animate>
+            <section>
                 <img width="40%" src= "imgs/Optimisation/GaussOpt.svg" />
+
                 <p>
                     \[\mu(x) = \mathbb{E}\left[ f(x) \right]\]
                     \[\mathcal{K}(x,x') = \mathbb{E}\left[ \big(f(x) - \mu(x)\big)\big(f(x') - \mu(x')\big) \right]\]
@@ -130,7 +132,8 @@
                     \end{align}
                 </p>
             </section>
-            <section> <p>Acquision Functions</p>
+            <section> <p>Acquision Functions give next trial point.</p>
+            <img width="70%" src="imgs/Optimisation/GaussOptAcq.svg" />
             </section>
             <section>
                 <pre><code class="python" data-trim style="font-size: 18px;">
@@ -162,12 +165,12 @@
         </section>
         <section><!-- Scattering -->
             <section>
-                <img src="imgs/Scattering/AtomImageBasic.svg" />
+                <video src="imgs/Scattering/Collision.mp4"></video>
             </section>
             <section>
-                <p>\(S\)-matrix</p>
+                <p>\(S\)-matrix maps in to out</p>
                 <p>\[\left|\psi_\rm{out}\right> = S \left|\psi_\rm{in}\right>\]</p>
-                <p>Cross-section</p>
+                <p>Cross-section is scattering strength</p>
                 <p>\[\sigma = \frac{4\pi(2\ell + 1)}{k^2}|S_\ell - 1|^2\]</p>
             </section>
             <section>
@@ -180,7 +183,7 @@
             </section>
             <section>
                 <p>Calculation via log-derivative</p>
-                <img width="60%" src="imgs/Scattering/LogDerivative.svg" />
+                <svg width="60%" data-src="imgs/Scattering/LogDerivative.svg"></svg>
             </section>
         </section>
         <section><!-- Resonances -->
@@ -297,7 +300,7 @@
                 <img src="imgs/Pend/cover.svg" />
             </section>
             <section>
-                <video src="imgs/Pend/Pendula.mp4" loop></video>
+                <video width="70%" src="imgs/Pend/Pendula.mp4" loop></video>
             </section>
             <section>
                 <img width="80%" src="imgs/Pend/pendula.svg" />
@@ -340,8 +343,8 @@
             </section>
             
             <section>
-                <p>S-matrix has poles at Jost zeros</p>
-                <p>\[S_\ell (k) = \frac{\mathcal{F}_\ell(-k)}{\mathcal{F}_\ell(k)}\]</p>
+                <p>Riemann sheets fold over when moving to energy</p>
+                <img src="imgs/Poles/RiemannX.svg" />
             </section>
             
             <section>
@@ -349,13 +352,13 @@
             </section>
             
             <section>
-                <video width="70%" autoplay loop src="imgs/Poles/AnalyticContinuationWithFeshbach102uK.mp4"></video>
+                <video width="60%" autoplay loop src="imgs/Poles/AnalyticContinuationWithFeshbach102uK.mp4"></video>
             </section>
             <section>
-                <video width="70%" autoplay loop src="imgs/Poles/AnalyticContinuationWithFeshbach304uK.mp4"></video>
+                <video width="60%" autoplay loop src="imgs/Poles/AnalyticContinuationWithFeshbach304uK.mp4"></video>
             </section>
             <section>
-                <video width="70%" autoplay loop src="imgs/Poles/AnalyticContinuationWithFeshbach506uK.mp4"></video>
+                <video width="60%" autoplay loop src="imgs/Poles/AnalyticContinuationWithFeshbach506uK.mp4"></video>
             </section>
             
             <section>
@@ -392,6 +395,7 @@
     <script src="reveal/plugin/markdown/markdown.js"></script>
     <script src="reveal/plugin/highlight/highlight.js"></script>
     <script src="reveal/plugin/zoom/zoom.js"></script>
+    <script src="loadSVG.js"></script>
     <script>
       // More info about initialization & config:
       // - https://revealjs.com/initialization/
@@ -412,6 +416,8 @@
       videos.forEach((vid) => {
         vid.onclick = videoClick;
       })
+      
+      loadDataSrcSVG();
     </script>
   </body>
 </html>
